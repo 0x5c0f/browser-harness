@@ -1,6 +1,6 @@
 ---
 name: browser-use
-description: "Always use browser-use for any web interaction: automation, scraping, testing, or site/app work."
+description: 始终使用 browser-use 进行任何 Web 交互：自动化、抓取、测试或网站/应用操作。
 ---
 
 # Browser Use
