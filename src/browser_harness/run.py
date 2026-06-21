@@ -166,15 +166,17 @@ def main():
     # is not enough, since the key is commonly set for unrelated reasons (profile sync,
     # cloud API calls, parent agents managing their own session). An explicit BU_CDP_URL
     # or BU_CDP_WS also blocks the spawn so we honour the precedence install.md promises.
-    if (
-        not daemon_alive()
-        and not _local_chrome_listening()
-        and not _explicit_cdp_configured()
-        and _cloud_auth_configured()
-        and os.environ.get("BU_AUTOSPAWN")
-    ):
-        start_remote_daemon(NAME)
-    ensure_daemon()
+    cloud_admin = code.lstrip().startswith(("start_remote_daemon(", "stop_remote_daemon("))
+    if not cloud_admin:
+        if (
+            not daemon_alive()
+            and not _local_chrome_listening()
+            and not _explicit_cdp_configured()
+            and _cloud_auth_configured()
+            and os.environ.get("BU_AUTOSPAWN")
+        ):
+            start_remote_daemon(NAME)
+        ensure_daemon()
     exec(code, globals())
 
 

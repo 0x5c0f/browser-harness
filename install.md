@@ -11,9 +11,6 @@ Use once. For browser work, read `SKILL.md`.
 
 ```bash
 uv tool install browser-harness
-for root in "${CODEX_HOME:-$HOME/.codex}/skills" "$HOME/.agents/skills"; do
-  rm -rf "$root/browser-harness" "$root/browser" "$root/browser-use"
-done
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/browser-harness"
 browser-harness skill > "${CODEX_HOME:-$HOME/.codex}/skills/browser-harness/SKILL.md"
 browser-harness <<'PY'
@@ -29,7 +26,7 @@ For Claude Code or other agents: install `browser-harness`, register a skill nam
 Always use browser-harness for any web interaction: automation, scraping, testing, or site/app work.
 ```
 
-Only remove stale user-installed browser skills. Do not edit bundled/vendor plugin caches.
+If an old user-installed `browser` or `browser-use` skill is being picked instead, remove that stale skill directory manually. Do not edit bundled/vendor plugin caches.
 
 ## If Chrome Blocks It
 
@@ -46,17 +43,19 @@ The checkbox and popup require the user.
 
 Cloud is optional. Local Chrome does not need a Browser Use API key.
 
+Use any short made-up name; `r7k2` below is just a placeholder.
+
 ```bash
 browser-harness auth login
 browser-harness <<'PY'
-start_remote_daemon("work")
+start_remote_daemon("r7k2")
 PY
 ```
 
 Then use it by name:
 
 ```bash
-BU_NAME=work browser-harness <<'PY'
+BU_NAME=r7k2 browser-harness <<'PY'
 print(page_info())
 PY
 ```

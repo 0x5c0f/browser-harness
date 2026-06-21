@@ -54,22 +54,22 @@ Or import a key safely:
 browser-harness auth login --api-key-stdin
 ```
 
-Start a cloud browser with the main-branch flow:
+Pick a short made-up name; `r7k2` below is just a placeholder:
 
 ```bash
 browser-harness <<'PY'
-start_remote_daemon("work")
+start_remote_daemon("r7k2")
 PY
 
-BU_NAME=work browser-harness <<'PY'
+BU_NAME=r7k2 browser-harness <<'PY'
 new_tab("https://example.com")
 print(page_info())
 PY
 ```
 
-Use `stop_remote_daemon("work")` when done. Remote daemons bill until they stop or time out.
+When the task is done and a cloud browser is still running, ask directly: "Should I close this browser now?" If yes, run `stop_remote_daemon(name)`. Remote daemons bill until they stop or time out.
 
-Do not call `start_remote_daemon("work")` and then keep using helpers in the default daemon. Use `BU_NAME=work` for subsequent commands.
+Do not start a remote daemon and then keep using the default daemon. Use the same name for `BU_NAME`.
 
 Cloud profiles for cookie sync live in `interaction-skills/profile-sync.md`.
 
@@ -118,7 +118,7 @@ If you get stuck on a browser mechanic, check `interaction-skills/`:
 - Omnibox popups are not real work tabs.
 - CDP target order is not Chrome's visible tab-strip order.
 - `BU_CDP_URL` is an HTTP DevTools endpoint; the daemon resolves it to WebSocket.
-- Stop cloud browsers with `stop_remote_daemon(name)` or `PATCH /browsers/{id} {"action":"stop"}`.
+- Ask before leaving cloud browsers running; stop them with `stop_remote_daemon(name)` or `PATCH /browsers/{id} {"action":"stop"}`.
 
 ## Domain Skills
 

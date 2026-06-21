@@ -22,14 +22,11 @@ browser-harness skill
 For Codex:
 
 ```bash
-for root in "${CODEX_HOME:-$HOME/.codex}/skills" "$HOME/.agents/skills"; do
-  rm -rf "$root/browser-harness" "$root/browser" "$root/browser-use"
-done
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/browser-harness"
 browser-harness skill > "${CODEX_HOME:-$HOME/.codex}/skills/browser-harness/SKILL.md"
 ```
 
-Only remove stale user-installed browser skills, never bundled/vendor plugin caches.
+If an old user-installed `browser` or `browser-use` skill is being picked instead, remove that stale skill directory manually. Never edit bundled/vendor plugin caches.
 
 ## Connect to a browser
 
